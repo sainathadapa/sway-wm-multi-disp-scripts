@@ -4,7 +4,7 @@ import json
 import sys
 import necessaryFuncs as nf
 
-proc_out = subprocess.run(['i3-msg', '-t', 'get_workspaces'], stdout=subprocess.PIPE)
+proc_out = subprocess.run(['swaymsg', '-t', 'get_workspaces'], stdout=subprocess.PIPE)
 wkList = json.loads(proc_out.stdout.decode('utf-8'))
 
 allWKNames = nf.getWKNames(wkList)
@@ -44,6 +44,6 @@ def mk_cmd(i, x):
 
 parCommToRun = [mk_cmd(i, x) for i, x in enumerate(currentProjWKs)]
 
-commandToRun = ["i3-msg", ''.join(parCommToRun)]
+commandToRun = ["swaymsg", ''.join(parCommToRun)]
 
 subprocess.call(commandToRun)

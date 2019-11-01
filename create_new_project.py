@@ -16,7 +16,7 @@ else:
 if (projectName is None) or (len(projectName) == 0):
     sys.exit(0)
 
-proc_out = subprocess.run(['i3-msg', '-t', 'get_workspaces'], stdout=subprocess.PIPE)
+proc_out = subprocess.run(['swaymsg', '-t', 'get_workspaces'], stdout=subprocess.PIPE)
 wkList = json.loads(proc_out.stdout.decode('utf-8'))
 
 for one_wk in wkList:
@@ -47,6 +47,6 @@ for i in range(1, len(allOutputs) + 1):
 
     commandToRun = commandToRun + 'workspace ' + currentWKName + '; '
 
-commandToRunArray = ['i3-msg', commandToRun]
+commandToRunArray = ['swaymsg', commandToRun]
 
 subprocess.call(commandToRunArray)

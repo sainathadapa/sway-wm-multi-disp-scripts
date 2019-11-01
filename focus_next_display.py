@@ -3,7 +3,7 @@ import subprocess
 import json
 import necessaryFuncs as nf
 
-proc_out = subprocess.run(['i3-msg', '-t', 'get_workspaces'], stdout=subprocess.PIPE)
+proc_out = subprocess.run(['swaymsg', '-t', 'get_workspaces'], stdout=subprocess.PIPE)
 wkList = json.loads(proc_out.stdout.decode('utf-8'))
 
 displays = list(sorted(nf.getListOfOutputs(wkList)))
@@ -15,5 +15,5 @@ if current_display_i+1 >= len(displays):
 else:
     next_display = displays[current_display_i + 1]
 
-commandToRun = ["i3-msg", 'focus output ' + next_display]
+commandToRun = ["swaymsg", 'focus output ' + next_display]
 subprocess.call(commandToRun)

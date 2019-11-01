@@ -4,7 +4,7 @@ import json
 import sys
 import necessaryFuncs as nf
 
-proc_out = subprocess.run(['i3-msg', '-t', 'get_workspaces'], stdout=subprocess.PIPE)
+proc_out = subprocess.run(['swaymsg', '-t', 'get_workspaces'], stdout=subprocess.PIPE)
 wkList = json.loads(proc_out.stdout.decode('utf-8'))
 
 focWkName = nf.getFocusedWK(wkList)
@@ -38,6 +38,6 @@ parCommToRun = ['workspace ' + x for x in wksToMakeVisible]
 if len(wkToBeFocused) > 0 and wksToMakeVisible[-1] != wkToBeFocused[0]:
     parCommToRun.append('workspace ' + wkToBeFocused[0])
 
-commandToRun = ["i3-msg", '; '.join(parCommToRun)]
+commandToRun = ["swaymsg", '; '.join(parCommToRun)]
 
 subprocess.call(commandToRun)

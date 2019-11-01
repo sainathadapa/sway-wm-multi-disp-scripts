@@ -15,7 +15,7 @@ projectName = projectName.decode('utf-8').replace('\n', '').replace('\r', '')
 if (projectName is None) or (len(projectName) == 0):
     sys.exit(0)
 
-proc_out = subprocess.run(['i3-msg', '-t', 'get_workspaces'], stdout=subprocess.PIPE)
+proc_out = subprocess.run(['swaymsg', '-t', 'get_workspaces'], stdout=subprocess.PIPE)
 wkList = json.loads(proc_out.stdout.decode('utf-8'))
 
 allWKNames = nf.getWKNames(wkList)
@@ -32,6 +32,6 @@ newProjWKs = [x.replace(":" + currentProj + ":", ":" + projectName + ":") for x 
 parCommand = ['rename workspace ' + currentProjWKs[i] + ' to ' + newProjWKs[i] + '; '
               for i, x in enumerate(currentProjWKs)]
 
-commandToRun = ['i3-msg', ''.join(parCommand)]
+commandToRun = ['swaymsg', ''.join(parCommand)]
 
 subprocess.call(commandToRun)

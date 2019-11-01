@@ -47,7 +47,7 @@ def rofi(options, program):
 
 
 # Get I3 tree
-proc_out = subprocess.run(['i3-msg', '-t', 'get_tree'], stdout=subprocess.PIPE)
+proc_out = subprocess.run(['swaymsg', '-t', 'get_tree'], stdout=subprocess.PIPE)
 i3tree = json.loads(proc_out.stdout.decode('utf-8'))
 
 # Create tree from the i3 tree output
@@ -61,7 +61,7 @@ for display in root.children:
         wk.workspace = True
 
 # Get the current workspace
-proc_out = subprocess.run(['i3-msg', '-t', 'get_workspaces'], stdout=subprocess.PIPE)
+proc_out = subprocess.run(['swaymsg', '-t', 'get_workspaces'], stdout=subprocess.PIPE)
 wkList = json.loads(proc_out.stdout.decode('utf-8'))
 focWkName = nf.getFocusedWK(wkList)
 
@@ -97,7 +97,7 @@ if selected == '':
 
 # Run the command
 selected = int(selected)+1
-command_to_run = ['i3-msg',
+command_to_run = ['swaymsg',
                   '[con_id=' + str(names_id_map[selected][1]) + '] ' +
                   'move --no-auto-back-and-forth container to workspace ' +
                   focWkName]
